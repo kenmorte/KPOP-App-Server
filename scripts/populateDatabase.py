@@ -1,0 +1,5 @@
+from populateArtists import populateArtists
+from populateSongsAndPlaylists import populateSongsAndPlaylists
+
+populateArtists()
+populateSongsAndPlaylists()
