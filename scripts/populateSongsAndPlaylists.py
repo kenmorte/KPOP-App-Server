@@ -45,7 +45,7 @@ def populateSongsAndPlaylists():
                 'danceLink': danceLink,
                 'danceStartTime': float(danceStartTime),
                 'difficulty': difficulty,
-                'duration': int(duration)
+                'duration': float(duration)
             })
             conn.request('POST', '/insert_song', params, headers)
             response = conn.getresponse()

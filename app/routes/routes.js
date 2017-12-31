@@ -403,7 +403,7 @@ module.exports = (app, db) => {
                     responseBody = { success: false, message: 'Error finding songs in database.' };
                 } else {
                     const randomSongs = getRandomNElements(songs, amount);
-                    fillSongsWithArtistNames(randomSongs, amount, res);
+                    fillSongsWithArtistNames(randomSongs, randomSongs.length, res);
                 }        
             });
     });
