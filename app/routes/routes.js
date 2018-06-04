@@ -13,8 +13,9 @@ const getRandomNElements = (items, n) => {
 
 module.exports = (app, db) => {
 
-    const fillSongsWithArtistNames = (songs, amount, res) => {
-        let responseBody = { success: true, songs: [] };        
+    const fillSongsWithArtistNames = (songs, amount, likes, plays, res) => {
+        let responseBody = { success: true, songs: [] };       
+        amount = Math.min(songs.length, amount); 
         
         songs.forEach((song) => {
             db.collection('artists').findOne({_id: ObjectID(song.artist_id)}, (err, artist) => {
@@ -23,6 +24,8 @@ module.exports = (app, db) => {
                 } else {
                     responseBody.songs.push(Object.assign({}, song, {artist: artist.name}));
                     if (responseBody.songs.length === amount) {
+                        responseBody.likes = likes;
+                        responseBody.plays = plays;
                         res.send(JSON.stringify(responseBody));
                     }
                 }
@@ -30,15 +33,17 @@ module.exports = (app, db) => {
         });
     };
 
-    const findSongObjectsFromIds = (songIds, amount, res) => {
+    const findSongObjectsFromIds = (songIds, amount, likes, plays, res) => {
         let responseBody = { success: true, songs: [] };        
 
         db.collection('songs').find({_id: {$in: songIds}}).toArray((err, songs) => {
             if (err) {
                 responseBody = { success: false, message: 'Failed to find song within playlist. Please check playlist.' };
             } else {
-                responseBody.songs = [];
-                fillSongsWithArtistNames(songs, amount, res);
+                responseBody.likes = likes;
+                responseBody.plays = plays;
+                responseBody.songs = [];    // TODO: Something wrong with logic here, we create responseBody but we use the response parameter in the next function
+                fillSongsWithArtistNames(songs, amount, likes, plays, res);
             }
         });
     };
@@ -141,6 +146,9 @@ module.exports = (app, db) => {
             id,
             name,
             imageUrl,
+            author,
+            source,
+            type,
         } = req.body;
         
         if ((!id && id !== 0) || !name) {
@@ -153,6 +161,11 @@ module.exports = (app, db) => {
         const artist = {
             name,
             imageUrl,
+            author,
+            source,
+            likes: 0,
+            plays: 0,
+            type,
         };
 
         db.collection('artists').findOne({name}, (err, existingArtist) => {
@@ -161,15 +174,20 @@ module.exports = (app, db) => {
                 res.send(JSON.stringify(responseBody));
             } else {
                 if (existingArtist) {
-                    if (imageUrl) {
-                        db.collection('artists').updateOne({_id: ObjectID(existingArtist._id)}, { $set: { imageUrl } })
-                            .then((success) => {
-                                responseBody = { success: success.ok ? true : false, message: success.ok ? 'Song already exists in database, modified image URL.' : 'Failed to modify image URL for existing song.', result: success };
-                                res.send(JSON.stringify(responseBody));
-                            });
-                    } else {
+                    let newParams = {};
+                    if (imageUrl) newParams.imageUrl = imageUrl;
+                    if (author) newParams.author = author;
+                    if (source) newParams.source = source;
+                    if (type) newParams.type = type;
+                    if (!Object.keys(newParams).length) {
                         responseBody = { success: false, message: 'Artist already exists in database.' };
                         res.send(JSON.stringify(responseBody));
+                    } else {
+                        db.collection('artists').updateOne({_id: ObjectID(existingArtist._id)}, { $set: newParams })
+                            .then((success) => {
+                                responseBody = { success: success.ok ? true : false, message: success.ok ? 'Song already exists in database, modified changed parameters.' : 'Failed to modify parameters for existing song.', result: success };
+                                res.send(JSON.stringify(responseBody));
+                            });
                     }
                 } else {
                     db.collection('artists').insert(artist, (err, results) => {
@@ -279,94 +297,252 @@ module.exports = (app, db) => {
     });
 
     /**
-     * Getting Random Songs from the "Easy" Playlist
-     * URL: localhost:8000/playlist/easy/:amount
-     * Description: Returns a random amount of songs from the "Easy" playlist
-     * HTTP Method: GET
-     * Body Parameters:
-     *  - Amount of songs to include
+     * Updating artist like count
+     * URL: localhost:8000/update_artist_like/:artistId/:action
+     * Description: Updates the artist like count by either incrementing or decrementing the count.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - id
+     *  - action
      */
-    app.get('/playlistEasy/:amount', (req, res) => {
+    app.put('/update_artist_like/:id/:action', (req, res) => {
         let responseBody;
         let {
             id,
-            amount
+            action,
         } = req.params;
 
-        amount = Number(amount);
-
-        db.collection('playlists').findOne({name: 'Easy'}, (err, playlist) => {
-            if (err) {
-                responseBody = { success: false, message: 'Error finding "Easy" playlist in database.' };
+        db.collection('artists').findOne({_id: ObjectID(id)}, (err, artist) => {
+            if (err || !artist) {
+                responseBody = { success: false, message: 'Error finding artist.' };
                 res.send(JSON.stringify(responseBody));
             } else {
-                responseBody = { success: true, songs: [] };
-                const songIDs = playlist.song_ids.map((id) => ObjectID(id));
-                const resultSongIDs = getRandomNElements(songIDs, amount);
-                let i = 0;
-                findSongObjectsFromIds(resultSongIDs, amount, res);
+                const likes = Math.max(0, artist.likes + (action === 'inc' ? 1 : action === 'dec' ? -1 : 0));
+                db.collection('artists').updateOne({_id: ObjectID(artist._id)}, { $set: { likes } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
             }
         });
     });
 
     /**
-     * Getting Random Songs from the "Medium" Playlist
-     * URL: localhost:8000/playlistMedium/:amount
-     * Description: Returns a random amount of songs from the "Medium" playlist
-     * HTTP Method: GET
-     * Body Parameters:
-     *  - Amount of songs to include
+     * Updating playlist like count
+     * URL: localhost:8000/update_playlist_like/:playlistId/:action
+     * Description: Updates the playlist like count by either incrementing or decrementing the count.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - id
+     *  - action
      */
-    app.get('/playlistMedium/:amount', (req, res) => {
+    app.put('/update_playlist_like/:id/:action', (req, res) => {
         let responseBody;
         let {
             id,
-            amount
+            action,
         } = req.params;
 
-        amount = Number(amount);
-
-        db.collection('playlists').findOne({name: 'Medium'}, (err, playlist) => {
-            if (err) {
-                responseBody = { success: false, message: 'Error finding "Medium" playlist in database.' };
+        db.collection('playlists').findOne({_id: ObjectID(id)}, (err, playlist) => {
+            if (err || !playlist) {
+                responseBody = { success: false, message: 'Error finding playlist.' };
                 res.send(JSON.stringify(responseBody));
             } else {
-                responseBody = { success: true, songs: [] };
-                const songIDs = playlist.song_ids.map((id) => ObjectID(id));
-                const resultSongIDs = getRandomNElements(songIDs, amount);
-                let i = 0;
-                findSongObjectsFromIds(resultSongIDs, amount, res);
+                let likes = playlist.likes ? playlist.likes : 0;
+                likes = Math.max(0, likes + (action === 'inc' ? 1 : action === 'dec' ? -1 : 0));
+                db.collection('playlists').updateOne({_id: ObjectID(playlist._id)}, { $set: { likes } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
             }
         });
     });
 
     /**
-     * Getting Random Songs from the "Hard" Playlist
-     * URL: localhost:8000/playlistHard/:amount
-     * Description: Returns a random amount of songs from the "Hard" playlist
-     * HTTP Method: GET
-     * Body Parameters:
-     *  - Amount of songs to include
+     * Updating year like count
+     * URL: localhost:8000/update_year_like/:year/:action
+     * Description: Updates the year like count by either incrementing or decrementing the count.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - year
+     *  - action
      */
-    app.get('/playlistHard/:amount', (req, res) => {
+    app.put('/update_year_like/:year/:action', (req, res) => {
+        let responseBody;
+        let {
+            year,
+            action,
+        } = req.params;
+
+        db.collection('featured').findOne({type: 'years'}, (err, years) => {
+            if (err || !years) {
+                responseBody = { success: false, message: 'Error finding playlist.' };
+                res.send(JSON.stringify(responseBody));
+            } else {
+                let likes = years.likes;
+                let like = likes[year] ? likes[year] : 0;
+                like = Math.max(0, like + (action === 'inc' ? 1 : action === 'dec' ? -1 : 0));
+                likes[year] = like;
+                db.collection('featured').updateOne({type: 'years'}, { $set: { likes } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
+            }
+        });
+    });
+
+    /**
+     * Updating type like count
+     * URL: localhost:8000/update_type_like/:type/:action
+     * Description: Updates the type like count by either incrementing or decrementing the count.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - type
+     *  - action
+     */
+    app.put('/update_type_like/:type/:action', (req, res) => {
+        let responseBody;
+        let {
+            type,
+            action,
+        } = req.params;
+
+        db.collection('featured').findOne({type: 'type'}, (err, typeData) => {
+            if (err || !typeData) {
+                responseBody = { success: false, message: 'Error finding type data: ' + err };
+                res.send(JSON.stringify(responseBody));
+            } else {
+                let likes = typeData.likes;
+                let like = likes[type] ? likes[type] : 0;
+                like = Math.max(0, like + (action === 'inc' ? 1 : action === 'dec' ? -1 : 0));
+                likes[type] = like;
+                db.collection('featured').updateOne({type: 'type'}, { $set: { likes } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
+            }
+        });
+    });
+
+    /**
+     * Increments artist play count
+     * URL: localhost:8000/increment_artist_play/:artistId
+     * Description: Increments the play count for an artist.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - id
+     */
+    app.put('/increment_artist_play/:id', (req, res) => {
         let responseBody;
         let {
             id,
-            amount
         } = req.params;
 
-        amount = Number(amount);
-
-        db.collection('playlists').findOne({name: 'Hard'}, (err, playlist) => {
-            if (err) {
-                responseBody = { success: false, message: 'Error finding "Hard" playlist in database.' };
+        db.collection('artists').findOne({_id: ObjectID(id)}, (err, artist) => {
+            if (err || !artist) {
+                responseBody = { success: false, message: 'Error finding artist.' };
                 res.send(JSON.stringify(responseBody));
             } else {
-                responseBody = { success: true, songs: [] };
-                const songIDs = playlist.song_ids.map((id) => ObjectID(id));
-                const resultSongIDs = getRandomNElements(songIDs, amount);
-                let i = 0;
-                findSongObjectsFromIds(resultSongIDs, amount, res);
+                const plays = artist.plays + 1;
+                db.collection('artists').updateOne({_id: ObjectID(artist._id)}, { $set: { plays } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
+            }
+        });
+    });
+
+    /**
+     * Increments playlist play count
+     * URL: localhost:8000/increment_playlist_play/:id
+     * Description: Increments the play count for a playlist.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - id
+     */
+    app.put('/increment_playlist_play/:id', (req, res) => {
+        let responseBody;
+        let {
+            id,
+        } = req.params;
+
+        db.collection('playlists').findOne({_id: ObjectID(id)}, (err, playlist) => {
+            if (err || !playlist) {
+                responseBody = { success: false, message: 'Error finding playlist.' };
+                res.send(JSON.stringify(responseBody));
+            } else {
+                const plays = (playlist.plays ? playlist.plays : 0) + 1;
+                db.collection('playlists').updateOne({_id: ObjectID(playlist._id)}, { $set: { plays } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
+            }
+        });
+    });
+
+    /**
+     * Increments year play count
+     * URL: localhost:8000/increment_year_play/:year
+     * Description: Increments the play count for a year.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - year
+     */
+    app.put('/increment_year_play/:year', (req, res) => {
+        let responseBody;
+        let {
+            year,
+        } = req.params;
+
+        db.collection('featured').findOne({type: 'years'}, (err, years) => {
+            if (err || !years) {
+                responseBody = { success: false, message: 'Error finding playlist.' };
+                res.send(JSON.stringify(responseBody));
+            } else {
+                let plays = years.plays;
+                let play = plays[year] ? plays[year] : 0;
+                plays[year] = play + 1;
+                db.collection('featured').updateOne({type: 'years'}, { $set: { plays } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
+            }
+        });
+    });
+
+    /**
+     * Increments type play count
+     * URL: localhost:8000/increment_type_play/:type
+     * Description: Increments the play count for a type.
+     * HTTP Method: POST
+     * Body parameters:
+     *  - type
+     */
+    app.put('/increment_type_play/:type', (req, res) => {
+        let responseBody;
+        let {
+            type,
+        } = req.params;
+
+        db.collection('featured').findOne({type: 'type'}, (err, typeData) => {
+            if (err || !typeData) {
+                responseBody = { success: false, message: 'Error finding type data: ' + err };
+                res.send(JSON.stringify(responseBody));
+            } else {
+                let plays = typeData.plays;
+                let play = plays[type] ? plays[type] : 0;
+                plays[type] = play + 1;
+                db.collection('featured').updateOne({type: 'type'}, { $set: { plays } })
+                    .then((success) => {
+                        responseBody = { success, result: success };
+                        res.send(JSON.stringify(responseBody));
+                    });
             }
         });
     });
@@ -401,9 +577,18 @@ module.exports = (app, db) => {
             .toArray((err, songs) => {
                 if (err) {
                     responseBody = { success: false, message: 'Error finding songs in database.' };
+                    res.send(JSON.stringify(responseBody));
                 } else {
-                    const randomSongs = getRandomNElements(songs, amount);
-                    fillSongsWithArtistNames(randomSongs, randomSongs.length, res);
+                    db.collection('featured').findOne({type: 'years'}, (err, years) => {
+                        if (err) {
+                            responseBody = { success: false, message: 'Error finding year data in database.' };
+                            res.send(JSON.stringify(responseBody));
+                        } else {
+                            let likes = years.likes[startYear];
+                            let plays = years.plays[startYear];
+                            fillSongsWithArtistNames(getRandomNElements(songs, amount), amount, likes, plays, res);
+                        }
+                    });
                 }        
             });
     });
@@ -444,6 +629,8 @@ module.exports = (app, db) => {
                                 responseBody = { success: false, message: 'Error finding songs in database.' };
                                 res.send(JSON.stringify(responseBody));                                                
                             } else {
+                                responseBody.likes = artist.likes;
+                                responseBody.plays = artist.plays;
                                 responseBody.songs = getRandomNElements(songs, amount).map((song) => Object.assign({}, song, {artist: artistName}));
                                 res.send(JSON.stringify(responseBody));                                                                                
                             }
@@ -477,7 +664,7 @@ module.exports = (app, db) => {
                     res.send(JSON.stringify(responseBody));                                                
                 } else {
                     const randomSongs = getRandomNElements(songs, amount);
-                    fillSongsWithArtistNames(randomSongs, amount, res);                                                            
+                    fillSongsWithArtistNames(randomSongs, amount, 0, 0, res);                                                            
                 }
             });
     });
@@ -505,11 +692,11 @@ module.exports = (app, db) => {
                 responseBody = { success: false, message: 'Error finding playlist by ID in database.' };
                 res.send(JSON.stringify(responseBody));
             } else {
-                responseBody = { success: true, songs: [] };
+                responseBody = { success: true, likes: playlist.likes, plays: playlist.plays, songs: [] };
                 const songIDs = playlist.song_ids.map((id) => ObjectID(id));
                 const resultSongIDs = getRandomNElements(songIDs, amount);
                 let i = 0;
-                findSongObjectsFromIds(resultSongIDs, amount, res);
+                findSongObjectsFromIds(resultSongIDs, amount, playlist.likes, playlist.plays, res);
             }
         });
     });
@@ -520,8 +707,8 @@ module.exports = (app, db) => {
      * Description: Returns a playlist from name and if it is a preset playlist.
      * HTTP Method: GET
      * Body Parameters:
-     *  - name
-     *  - isPreset
+     *  - Artist ID
+     *  - Artist Name
      */
     app.get('/playlist/:name/:isPreset', (req, res) => {
         let responseBody;
@@ -546,44 +733,187 @@ module.exports = (app, db) => {
     });
 
     /**
-     * Getting Random Songs from a given Playlist
-     * URL: localhost:8000/playlist/id/amount
-     * Description: Returns a random amount of songs from a given playlist
+     * Getting a specified amount of random songs based on the artist type
+     * URL: localhost:8000/playlistType/:type/:amount
      * HTTP Method: GET
      * Body Parameters:
-     *  - Playlist ID
+     *  - Type of artist
      *  - Amount of songs to include
      */
-    app.get('/playlist/random/:id/:amount', (req, res) => {
+    app.get('/playlistType/:type/:amount', (req, res) => {
         let responseBody;
         let {
-            id,
+            type,
             amount
         } = req.params;
 
         amount = Number(amount);
+        switch (type) {     // Validate the correct artist type
+            case 'Boy Group':
+            case 'Girl Group':
+            case 'Co-Ed Group':
+            case 'Sub-Unit Group':
+            case 'Solo':
+                break;
+            default:
+                responseBody = { success: false, message: 'Error validating type. Passed in "' + type + '".' };
+                res.send(JSON.stringify(responseBody));
+                return;
+        }
 
-        db.collection('playlists').findOne({_id: ObjectID(id)}, (err, playlist) => {
-            if (err) {
-                responseBody = { success: false, message: 'Error finding playlist in database.' };
+        db.collection('artists').find({ type })
+            .toArray((err, artists) => {
+                if (err) {
+                    responseBody = { success: false, message: 'Error finding artists in database: ' + err };
+                    res.send(JSON.stringify(responseBody));                                                
+                } else {
+                    let artistIDs = artists.map(artist => ObjectID(artist._id));
+                    db.collection('songs').find({artist_id: {$in: artistIDs}})
+                        .toArray((err, songs) => {
+                            if (err) {
+                                responseBody = { success: false, message: 'Error finding songs in database: ' + err };
+                                res.send(JSON.stringify(responseBody));  
+                            } else {
+                                db.collection('featured').findOne({type: 'type'}, (err, typeData) => {
+                                    if (err) {
+                                        responseBody = { success: false, message: 'Error finding featured data: ' + err };
+                                        res.send(JSON.stringify(responseBody));      
+                                    } else {
+                                        let key = type === 'Solo' ? 'Solo Artists' : type + 's';
+                                        let likes = typeData.likes[key];
+                                        let plays = typeData.plays[key];
+                                        fillSongsWithArtistNames(getRandomNElements(songs, amount), amount, likes, plays, res);
+                                    }
+                                });
+                            }
+                        })                                                                 
+                }
+            });
+    });
+
+    /**
+     * Getting all artists
+     * URL: localhost:8000/artist/all
+     * Description: Returns alls artists
+     * HTTP Method: GET
+     * Body Parameters: N/A
+     */
+    app.get('/artist/all', (req, res) => {
+        let responseBody;
+
+        db.collection('artists').find()
+            .toArray((err, artists) => {
+                if (err) {
+                    responseBody = { success: false, message: 'Error collecting artists.' };
+                } else {
+                    responseBody = { success: true, artists };
+                }
+                res.send(JSON.stringify(responseBody));
+            });
+    });
+
+    /**
+     * Getting all songs from a given Artist
+     * URL: localhost:8000/artist/songs/id
+     * Description: Returns all the songs from a given artist
+     * HTTP Method: GET
+     * Body Parameters:
+     *  - Artist ID
+     */
+    app.get('/artist/songs/:id', (req, res) => {
+        let responseBody;
+        let {
+            id,
+        } = req.params;
+
+        db.collection('artists').findOne({_id: ObjectID(id)}, (err, artist) => {
+            if (err || !artist) {
+                responseBody = { success: false, message: 'Error finding artist.' };
                 res.send(JSON.stringify(responseBody));
             } else {
-                responseBody = { success: true, songs: [] };
-                const songIDs = playlist.song_ids;
-                const randomSongIDs = songIDs.sort(() => .5 - Math.random());
-                const resultSongIDs = randomSongIDs.slice(0,Math.min(amount, randomSongIDs.length));
-                let i = 0;
-
-                db.collection('songs').find({_id: {$in: resultSongIDs}}).toArray((err, songs) => {
-                    if (err) {
-                        responseBody = { success: false, message: 'Failed to find song within playlist. Please check playlist.' };
-                    } else {
-                        responseBody.songs = songs;
-                    }
-                    res.send(JSON.stringify(responseBody));
-                });
+                const artistName = artist.name;
+                db.collection('songs').find({artist_id: ObjectID(id)})
+                    .toArray((err, songs) => {
+                        if (err) {
+                            responseBody = { success: false, message: 'Error finding songs for artist.' };
+                        } else {
+                            responseBody = { success: true, songs: songs.map(song => Object.assign({}, {artist: artistName}, song)) };
+                        }
+                        res.send(JSON.stringify(responseBody));
+                    });
             }
         });
+    });
+    
+    /**
+     * Gets a playlist from name and if it is a preset playlist.
+     * URL: localhost:8000/featured/all
+     * Description: Returns all the featured playlists shown on the home page.
+     * HTTP Method: GET
+     * Body Parameters: N/A
+     */
+    app.get('/featured/all', (req, res) => {
+        let responseBody = {};
+
+        db.collection('playlists').find()
+            .toArray((err, playlists) => {
+                if (err) {
+                    responseBody = { success: false, message: 'Error finding playlists in database.' };
+                    res.send(JSON.stringify(responseBody));
+                } else {
+                    responseBody.playlists = playlists.map(playlist => {
+                        delete playlist.song_ids;
+                        return playlist;
+                    });
+                    
+                    db.collection('featured').findOne({type: 'artists'}, (err, featuredArtists) => {
+                        if (err) {
+                            responseBody = { success: false, message: 'Error finding featured playlists in database.' };
+                            res.send(JSON.stringify(responseBody));
+                        } else {
+                            db.collection('artists').find({name: {$in: featuredArtists.names}})
+                                .toArray((err, artists) => {
+                                    if (err) {
+                                        responseBody = { success: false, message: 'Error finding featured artists in database.' };
+                                        res.send(JSON.stringify(responseBody));
+                                    } else {
+                                        responseBody.artists = artists;
+
+                                        db.collection('featured').findOne({type: 'years'}, (err, years) => {
+                                            if (err) {
+                                                responseBody = { success: false, message: 'Error finding featured years in database.' };
+                                                res.send(JSON.stringify(responseBody));
+                                                
+                                            } else {
+                                                responseBody.years = years;
+
+                                                db.collection('featured').findOne({type: 'type'}, (err, types) => {
+                                                    if (err) {
+                                                        responseBody = { success: false, message: 'Error finding featured types in database.' };    
+                                                        res.send(JSON.stringify(responseBody));
+                                                    } else {
+                                                        responseBody.types = types;
+
+                                                        db.collection('artists').find()
+                                                            .toArray((err, artists) => {
+                                                                if (err) {
+                                                                    responseBody = { success: false, message: 'Error collecting all artists.' };
+                                                                    res.send(JSON.stringify(responseBody));
+                                                                } else {
+                                                                    responseBody.allArtists = artists;
+                                                                }
+                                                                res.send(JSON.stringify(responseBody));
+                                                            });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                        }
+                    });
+                }   
+            });
     });
 
     /**

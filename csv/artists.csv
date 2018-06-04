@@ -1,98 +1,252 @@
-Artist,ID,Unique Artists,Picture URL
-2NE1,0,2NE1,http://i41.tinypic.com/2cxvihy.jpg
-AMBER,1,AMBER,https://0.soompi.io/wp-content/uploads/2017/03/25143847/fx-amber-.jpg
-APink,2,APink,http://kprofiles.com/wp-content/uploads/Apink.jpg
-APink,3,ASTRO,
-APink,4,Beast,
-ASTRO,5,Big Bang,
-ASTRO,6,BLACKPINK,
-ASTRO,7,BTS,http://kprofiles.com/wp-content/uploads/2016/04/bts-members-profile.jpg
-Beast,8,Cosmic Girls,
-Beast,9,Crayon Pop,
-Big Bang,10,Dreamcatcher,
-Big Bang,11,Eric Nam,
-BLACKPINK,12,EXID,
-BLACKPINK,13,EXO,
-BLACKPINK,14,f(x),
-BLACKPINK,15,Girls Day,
-BTS,16,Girls' Generation,
-BTS,17,GOT7,
-BTS,18,I.O.I,
-BTS,19,K.A.R.D.,
-Cosmic Girls,20,Kara,
-Crayon Pop,21,Miss A,
-Dreamcatcher,22,MONSTA X,
-Dreamcatcher,23,PLAYBACK,
-Eric Nam,24,Pristin,
-EXID,25,Red Velvet,
-EXID,26,SEVENTEEN,
-EXO,27,SF9,
-EXO,28,Shinee,
-EXO,29,Sistar,
-EXO,30,Sunmi,
-f(x),31,Super Junior,
-f(x),32,SUPER JUNIOR-D&E,
-Girls Day,33,Twice,https://hype.my/wp-content/uploads/2017/04/twice-5.jpg
-Girls Day,34,VIXX,
-Girls Day,35,Wanna One,
-Girls' Generation,36,WINNER,
-Girls' Generation,37,Wonder Girls,
-Girls' Generation,38,GD X TAEYANG,
-GOT7,39,GFRIEND,
-GOT7,40,PENTAGON,
-GOT7,,,
-GOT7,,,
-GOT7,,,
-GOT7,,,
-GOT7,,,
-GOT7,,,
-I.O.I,,,
-I.O.I,,,
-K.A.R.D.,,,
-Kara,,,
-Miss A,,,
-MONSTA X,,,
-MONSTA X,,,
-PLAYBACK,,,
-Pristin,,,
-Red Velvet,,,
-Red Velvet,,,
-Red Velvet,,,
-Red Velvet,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SEVENTEEN,,,
-SF9,,,
-SF9,,,
-SF9,,,
-SF9,,,
-Shinee,,,
-Shinee,,,
-Sistar,,,
-Sunmi,,,
-Super Junior,,,
-Super Junior,,,
-Super Junior,,,
-SUPER JUNIOR-D&E,,,
-Twice,,,
-Twice,,,
-Twice,,,
-Twice,,,
-Twice,,,
-Twice,,,
-Twice,,,
-VIXX,,,
-VIXX,,,
-Wanna One,,,
-Wanna One,,,
-Wanna One,,,
-WINNER,,,
-WINNER,,,
-Wonder Girls,,,
-GD X TAEYANG,,,
-GFRIEND,,,
-PENTAGON,,,
+Artist,ID,Unique Artists,Picture URL,Image Author,Image Source,Type
+BTS,0,BTS,https://upload.wikimedia.org/wikipedia/commons/3/3a/Bangtan_Boys_in_Hongdae_on_March_27%2C_2014.jpg,Taehyung's Moment,http://taehyungsmoment.tistory.com/entry/140327-%ED%99%8D%EB%8C%80,Boy Group
+Twice,1,Twice,https://upload.wikimedia.org/wikipedia/commons/d/da/%ED%8A%B8%EC%99%80%EC%9D%B4%EC%8A%A4%28TWICE%29_G%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%EC%95%84%EC%8B%9C%EC%95%84_%EB%93%9C%EB%A6%BC_%EC%BD%98%EC%84%9C%ED%8A%B8_%288%29.jpg,SJ,http://sjcontents.tistory.com/720,Girl Group
+Beast,2,Beast,https://upload.wikimedia.org/wikipedia/commons/5/5e/%28Marie_Claire_Korea%29_BEAST_is_BACK%21_%287%29.jpg,Marie Claire Korea,https://www.youtube.com/watch?v=I7Ecjl3Qzfg,Boy Group
+SHINee,3,SHINee,https://upload.wikimedia.org/wikipedia/commons/9/99/20160730-P1000584_%2828876032575%29.jpg,mduangdara,https://www.flickr.com/photos/mduangdara/28876032575/,Boy Group
+Super Junior,4,Super Junior,https://upload.wikimedia.org/wikipedia/commons/5/52/KCON_2015_Super_Junior_DSC02998_%2820357930851%29.jpg,mduangdara,https://www.flickr.com/photos/mduangdara/20357930851/,Boy Group
+VIXX,5,VIXX,https://upload.wikimedia.org/wikipedia/commons/7/7d/VIXX_at_Korea_Sale_Festa.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/koreanet/30058040055/in/album-72157626585071327/,Boy Group
+Beast,6,Girls' Generation,https://upload.wikimedia.org/wikipedia/commons/2/23/Girls%27_Generation_at_DMC_Festival_2015_MBC_Radio_DJ_Concert_02.jpg,Pabian,http://amymen.tistory.com/981,Girl Group
+Twice,7,Kara,https://upload.wikimedia.org/wikipedia/commons/b/be/KARA_at_DSP_Festival.jpg,takato marui,https://www.flickr.com/photos/32413914@N00/12012255695,Girl Group
+Twice,8,Wonder Girls,https://upload.wikimedia.org/wikipedia/commons/b/bf/Wonder_Girls-2008_BICHE_02.jpg,복사골철이,https://commons.wikimedia.org/wiki/File:Wonder_Girls-2008_BICHE_02.jpg,Girl Group
+VIXX,9,Miss A,https://upload.wikimedia.org/wikipedia/commons/7/78/Miss_A_at_the_Korea_KPOP_World_Festival_2013.jpg,koreanet,https://www.flickr.com/photos/koreanet/11040012933/,Girl Group
+Twice,10,EXO,https://upload.wikimedia.org/wikipedia/commons/f/fa/Exo_2012.jpg,the.angrycamel,https://www.flickr.com/photos/angrycamel/8210879921/,Boy Group
+Twice,11,Red Velvet,https://upload.wikimedia.org/wikipedia/commons/e/e4/160618_MBC_Thank_You_Festival_%E2%80%93_Red_Velvet.jpg,secret_icecream,http://june14th.tistory.com/78,Girl Group
+Twice,12,Big Bang,https://upload.wikimedia.org/wikipedia/commons/a/a9/Big_Bang_In_Thailand.JPG,Sry85,https://commons.wikimedia.org/wiki/User:Sry85,Boy Group
+Twice,13,f(x),https://upload.wikimedia.org/wikipedia/commons/b/be/151025_f%28x%29_01.jpg,PTTf(x),http://pttfx.tistory.com/45,Girl Group
+Girls' Generation,14,SISTAR,https://upload.wikimedia.org/wikipedia/commons/1/16/%EC%94%A8%EC%8A%A4%ED%83%80%28SISTAR%29_G%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%EC%95%84%EC%8B%9C%EC%95%84_%EB%93%9C%EB%A6%BC_%EC%BD%98%EC%84%9C%ED%8A%B8_%2811%29.jpg,SJ,http://sjcontents.tistory.com/721,Girl Group
+Kara,15,APink,https://upload.wikimedia.org/wikipedia/commons/6/6c/180324_%EC%A0%84%EB%9D%BC%EA%B3%A050%EC%A3%BC%EB%85%84_%EA%B8%B0%EB%85%90%ED%96%89%EC%82%AC_%EC%97%90%EC%9D%B4%ED%95%91%ED%81%AC_part.1_%281%29.jpg,redpanda0419,http://redpanda0419.tistory.com/m/38,Girl Group
+Super Junior,16,EXID,https://upload.wikimedia.org/wikipedia/commons/6/6e/141211_EXID_%EB%8D%94%EC%87%BC_in_%EC%BD%94%EC%97%91%EC%8A%A4_%EC%95%BC%EC%99%B8%EB%AC%B4%EB%8C%80.jpg,우연히현영,http://wooyeon724.tistory.com/96,Girl Group
+Wonder Girls,17,MONSTA X,https://upload.wikimedia.org/wikipedia/commons/4/4a/Monsta_X_Promoting_The_First_Asia_Fan_Meeting_in_Bangkok_2017.png,Bugaboo.TV,https://www.youtube.com/watch?v=ohvKnVfFmNc,Boy Group
+Miss A,18,Girls Day,https://upload.wikimedia.org/wikipedia/commons/6/60/%EA%B1%B8%EC%8A%A4%EB%8D%B0%EC%9D%B4%28Girl%27s_Day%29_2015_%ED%94%BC%EB%8B%89%EC%8A%A4_%EC%84%AC%EB%A8%B8_%ED%8E%98%EC%8A%A4%ED%8B%B0%EB%B2%8C_%EC%9D%BC%EC%82%B0_%ED%82%A8%ED%85%8D%EC%8A%A4_02.jpg,SJ,http://sjcontents.tistory.com/353,Girl Group
+EXO,19,BLACKPINK,https://upload.wikimedia.org/wikipedia/commons/0/0c/170113_BLACKPINK_Golden_Disc_Awards.jpg,Delicato JJ,http://delicatojj.tistory.com/14,Girl Group
+Red Velvet,20,WINNER,https://upload.wikimedia.org/wikipedia/commons/2/24/180110_%EC%9C%84%EB%84%88.jpg,뉴스인스타,https://www.youtube.com/watch?v=01O8UZfWwgQ,Boy Group
+Big Bang,21,GOT7,https://upload.wikimedia.org/wikipedia/commons/9/93/KOCIS_Korea_Mnet_GOT7_01_%2812986919333%29.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/koreanet/12986919333/,Boy Group
+f(x),22,SF9,https://upload.wikimedia.org/wikipedia/commons/9/9e/%28TV10%29_SF9%28%EC%97%90%EC%8A%A4%EC%97%90%ED%94%84%EB%82%98%EC%9D%B8%29%2C_%EC%88%A8%EA%B2%A8%EC%99%94%EB%8D%98_%EB%A7%A4%EB%A0%A5%EC%9C%BC%EB%A1%9C_%E2%80%98%ED%8C%A1%ED%8C%8C%EB%A0%88%E2%80%99%EB%A5%BC_%EC%9A%B8%EB%A6%AC%EB%8B%A4_%28%EC%87%BC%EC%BC%80%EC%9D%B4%EC%8A%A4_%EC%9D%B8%ED%84%B0%EB%B7%B0_%EC%98%81%EC%83%81%29_%282%29_11s.jpg,tenasia,https://www.youtube.com/watch?v=DexXizbwlBM&t=1s,Boy Group
+SISTAR,23,Wanna One,https://upload.wikimedia.org/wikipedia/commons/b/b8/Wanna_One_performing_at_INK_Concert_2017_05.png,DaftTaengk,https://www.youtube.com/watch?v=cgAzYz7fR3I,Boy Group
+Big Bang,24,SEVENTEEN,https://upload.wikimedia.org/wikipedia/commons/2/26/Seventeen_performing_Don%27t_Wanna_Cry_at_Dream_Concert_2017_02.png,DaftTaengk,https://www.youtube.com/watch?v=LosAUKG2fBg,Boy Group
+EXO,25,Dreamcatcher,https://upload.wikimedia.org/wikipedia/commons/3/3a/170822_%EC%83%81%EC%95%94_%EB%93%9C%EB%A6%BC%EC%BA%90%EC%B3%90_%EC%A7%81%EC%BA%A0_18_DREAMCATCHER_tbs_%ED%8C%A9%ED%8A%B8in%EC%8A%A4%ED%83%80_10s.jpg,Ellin Y,https://www.youtube.com/watch?v=fPJe_3cw9PQ,Girl Group
+BTS,26,K.A.R.D.,https://upload.wikimedia.org/wikipedia/commons/0/02/170108_%EB%A1%AF%EB%8D%B0%EC%9B%94%EB%93%9C_%EB%9D%BC%EC%9D%B4%EC%A7%95%EC%8A%A4%ED%83%80_-_K.A.R.D_Oh_NaNa_%EC%A7%81%EC%BA%A0_by_DaftTaengk_2m56s.jpg,DaftTaengk,https://www.youtube.com/watch?v=6qT9ikE_Y64,Co-Ed Group
+APink,27,ASTRO,https://upload.wikimedia.org/wikipedia/commons/a/af/Astro_at_%22Dream_Part._01%22_Showcase.png,tenasia,https://www.youtube.com/watch?v=j7wxUVhXveo,Boy Group
+EXID,28,Pristin,https://upload.wikimedia.org/wikipedia/commons/5/57/170530_%EC%84%A0%ED%94%8C_%EC%BD%98%EC%84%9C%ED%8A%B8_-_%ED%94%84%EB%A6%AC%EC%8A%A4%ED%8B%B4_%27WEE_WOO%27_4K_%EC%A7%81%EC%BA%A0_by_DaftTaengk_1m9s.jpg,DaftTaengk,https://www.youtube.com/watch?v=mKUCJxGqshI,Girl Group
+EXO,29,IOI,https://upload.wikimedia.org/wikipedia/commons/8/88/I.O.I_Seongnam_Park_160616_%281%29.png,DC C.YEON,http://docwa77.tistory.com/45,Girl Group
+Girls' Generation,30,Eric Nam,https://upload.wikimedia.org/wikipedia/commons/4/41/EricNam_MexicoPhoto.png,Bekko12,https://commons.wikimedia.org/wiki/File:EricNam_MexicoPhoto.png,Solo
+f(x),31,Sunmi,https://upload.wikimedia.org/wikipedia/commons/b/bf/180119_%EC%84%A0%EB%AF%B8_01.jpg,뉴스인스타,https://www.youtube.com/watch?v=rWwN3L1e9is,Solo
+APink,32,Cosmic Girls,https://upload.wikimedia.org/wikipedia/commons/0/06/170716_%EC%88%98%EC%84%9C%EC%97%AD_%EA%B2%8C%EB%A6%B4%EB%9D%BC_%284%29.jpg,미의 기준,http://19981015.tistory.com/22,Girl Group
+Girls' Generation,33,PLAYBACK,https://upload.wikimedia.org/wikipedia/commons/1/15/%ED%94%8C%EB%A0%88%EC%9D%B4%EB%B0%B1%28PLAYBACK%29_%ED%95%9C%EA%B5%AD%EA%B5%90%ED%86%B5%EB%8C%80%ED%95%99%EA%B5%90_%EC%9D%98%EC%99%95%EC%BA%A0%ED%8D%BC%EC%8A%A4_%EC%B6%95%EC%A0%9C.jpg,SJ,http://sjcontents.tistory.com/306,Girl Group
+MONSTA X,34,Crayon Pop,https://upload.wikimedia.org/wikipedia/commons/4/40/%ED%81%AC%EB%A0%88%EC%9A%A9%ED%8C%9D%28Crayon_Pop%29_%EB%8F%84%EC%8B%9C_%EA%BC%AC%EB%A7%88%EB%93%A4%EC%9D%98_%ED%96%89%EB%B3%B5%ED%95%9C_%EC%B6%95%EC%A0%9C_%ED%8B%B0%EB%B8%8C%EB%A1%9C%EB%93%9C_%EC%9B%90%EC%9D%8C%EB%B0%A9%EC%86%A1_01.jpg,SJ,http://sjcontents.tistory.com/312,Girl Group
+APink,35,2NE1,https://upload.wikimedia.org/wikipedia/commons/4/4a/2NE1_from_acrofan_2.jpg,acrofan.com,http://www.acrofan.com/ko-kr/life/content/20110220/0802030301,Girl Group
+BTS,36,SUPER JUNIOR-D&E,https://upload.wikimedia.org/wikipedia/commons/f/f5/D%26E_Present_in_Hong_Kong.jpg,Malyn18,https://commons.wikimedia.org/wiki/File:D%26E_Present_in_Hong_Kong.jpg,Sub-Unit Group
+SHINee,37,AMBER,https://upload.wikimedia.org/wikipedia/commons/4/40/Amber_Liu_at_Jeju_K-Pop_Festival%2C_in_October_2015_02.jpg,PTTf(x) - All for f(x) 에프엑스,http://pttfx.tistory.com/45,Solo
+Girls Day,38,GD X TAEYANG,https://upload.wikimedia.org/wikipedia/commons/5/51/BIGBANG_MADE_TOUR_IN_DALIAN_-_2.jpg,Ghyuk,http://alwaysbepretty.tistory.com/23,Boy Group
+BLACKPINK,39,GFRIEND,https://upload.wikimedia.org/wikipedia/commons/0/01/20160730-P1000885_%2828352591423%29.jpg,mduangdara,https://www.flickr.com/photos/mduangdara/28352591423/,Girl Group
+WINNER,40,PENTAGON,https://upload.wikimedia.org/wikipedia/commons/1/1b/171215_Pentagon.png,Little Star* @kinowflake,http://19980127.tistory.com/17,Boy Group
+GOT7,41,Stray Kids,https://upload.wikimedia.org/wikipedia/commons/9/97/180420_Stray_Kids_KBS_Music_Bank_Rehearsal.png,뉴스인스타,https://www.youtube.com/watch?v=fuQQo2UG_mo,Boy Group
+GOT7,42,EXO-CBX,https://upload.wikimedia.org/wikipedia/commons/6/65/EXO_at_the_SMTown_Week_02.jpg,Babyxiu,http://babyxiu.tistory.com/entry/131224-SMTOWN-WEEK-%EC%97%94%EB%94%A9,Boy Group
+GOT7,43,Weki Meki,https://upload.wikimedia.org/wikipedia/commons/d/d6/171202_%EC%9C%84%ED%82%A4%EB%AF%B8%ED%82%A4_01.png,mang2goon,https://www.youtube.com/watch?v=fUiFScMWn5E,Girl Group
+GOT7,44,AOA CREAM,https://upload.wikimedia.org/wikipedia/commons/e/e8/AOA_Cream_at_a_mini_fan_meeting_in_February_2016_01.jpg,Hey Day,http://hdpics.tistory.com/87,Sub-Unit Group
+GOT7,45,Highlight,https://upload.wikimedia.org/wikipedia/commons/5/5e/%28Marie_Claire_Korea%29_BEAST_is_BACK%21_%287%29.jpg,Marie Claire Korea,https://www.youtube.com/watch?v=I7Ecjl3Qzfg,Boy Group
+GOT7,46,SISTAR19,https://upload.wikimedia.org/wikipedia/commons/b/ba/Sistar19.jpg,KIYOUNG KIM,https://www.flickr.com/photos/paparazzistudio/9064885974,Sub-Unit Group
+SF9,47,Block B,https://upload.wikimedia.org/wikipedia/commons/5/58/KCON16LA_-_Saturday_Curtain_Call_-_20160731-P1010094_%2828431780383%29.jpg,mduangdara,https://www.flickr.com/photos/mduangdara/28431780383/,Boy Group
+GOT7,48,INFINITE,https://upload.wikimedia.org/wikipedia/commons/2/22/Korea_KPOP_World_Festival_44.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/42438955@N05/11039783895/,Boy Group
+SF9,49,MOMOLAND,https://upload.wikimedia.org/wikipedia/commons/c/cf/%EB%AA%A8%EB%AA%A8%EB%9E%9C%EB%93%9C%28MOMOLAND%29_%ED%8F%89%EC%B0%BD_%EB%8F%99%EA%B3%84%EC%98%AC%EB%A6%BC%ED%94%BD_G-10_%ED%8A%B9%EC%A7%91_%EC%83%9D%EB%B0%A9%EC%86%A1_%2816%29.jpg,SJ,http://sjcontents.tistory.com/1037,Girl Group
+SF9,50,Brown Eyed Girls,https://upload.wikimedia.org/wikipedia/commons/e/e3/K-POP_group_Brown_Eyed_Girls_performs_to_celebrate_the_2013_World_Rowing_Championship.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/42438955@N05/9607763476/,Girl Group
+SF9,51,CLC,https://upload.wikimedia.org/wikipedia/commons/9/9e/160903_CLC_Asia_Music_Stage.jpg,147Company,http://147company.com/1267,Girl Group
+Wanna One,52,4MINUTE,https://upload.wikimedia.org/wikipedia/commons/9/94/4minute_at_MTV-DAUM_Music_Fest.jpg,acrofan.com,http://www.acrofan.com/ko-kr/life/content/20110220/0802030301,Girl Group
+Wanna One,53,PSY,https://upload.wikimedia.org/wikipedia/commons/b/b0/PSY_EMTV_logo_27_%288198008711%29.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/koreanet/8198008711/,Solo
+Wanna One,54,B1A4,https://upload.wikimedia.org/wikipedia/commons/e/e4/B1A4_2016.png,TV10,https://www.youtube.com/watch?v=nJdRIXwT7kI,Boy Group
+SEVENTEEN,55,HyunA,https://upload.wikimedia.org/wikipedia/commons/9/96/HyunA_at_a_fansign_on_May_12%2C_2017_3.jpg,Dazzling you,http://dazzlingyou.tistory.com/77,Solo
+SEVENTEEN,56,UP10TION,https://upload.wikimedia.org/wikipedia/commons/b/b1/%ED%85%90%EC%95%84%EC%8B%9C%EC%95%84_%EB%A7%A4%EA%B1%B0%EC%A7%84_7%EC%9B%94%ED%98%B8_%EC%B4%AC%EC%98%81_%ED%98%84%EC%9E%A5_-_%EC%97%85%ED%85%90%EC%85%98_1m_53s.jpg,tenasia10,https://www.youtube.com/watch?v=9Kuz2fnIY-Q,Boy Group
+SEVENTEEN,57,AOA,https://upload.wikimedia.org/wikipedia/commons/b/b6/160924_AOA_%EC%9D%B8%EC%B2%9C%ED%95%9C%EB%A5%98%EA%B4%80%EA%B4%91%EC%BD%98%EC%84%9C%ED%8A%B8.jpg,shinjimindotcom,http://hdpics.tistory.com/149,Girl Group
+Dreamcatcher,58,2PM,https://upload.wikimedia.org/wikipedia/commons/e/e9/2PM%2Ca_Korean_boy_band_-_5865346497.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/42438955@N05/5865346497/,Boy Group
+SEVENTEEN,59,THE BOYZ,https://upload.wikimedia.org/wikipedia/commons/2/25/180112_%EB%8D%94%EB%B3%B4%EC%9D%B4%EC%A6%88_01.jpg,뉴스인스타,https://www.youtube.com/watch?v=lIcevs3Rs8M,Boy Group
+Red Velvet,60,JBJ,https://upload.wikimedia.org/wikipedia/commons/7/77/171021_JBJ_01.jpg,DRAGON SOUP,http://dragonxxsoup.tistory.com/148,Boy Group
+SEVENTEEN,61,MAMAMOO,https://upload.wikimedia.org/wikipedia/commons/5/53/Mamamoo_in_2016_Korea_Sale_Festa_Opening_Ceremony.jpg,Republic of Korea,https://www.flickr.com/photos/koreanet/30058079055/in/album-72157626585071327/,Girl Group
+SEVENTEEN,62,NCT 127,https://upload.wikimedia.org/wikipedia/commons/5/51/160820_busan_nct_127_01.png,Ellin Y,https://www.youtube.com/watch?v=pNddADYFJbI,Boy Group
+SEVENTEEN,63,HALO,https://upload.wikimedia.org/wikipedia/commons/a/ab/Idol_group_%E2%80%98HALO%E2%80%99_members_arrive_at_the_red_carpet_event_of_the_Puchon_International_Fantastic_Film_Festival_in_Bucheon_on_July_17%2C_2014.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/koreanet/14703807414/,Boy Group
+K.A.R.D.,64,SNUPER,https://upload.wikimedia.org/wikipedia/commons/5/58/09%EC%9B%94_26%EC%9D%BC_%EB%AE%A4%EC%BD%98_%EC%87%BC%EC%BC%80%EC%9D%B4%EC%8A%A4_MUCON_Showcase_%2891%29.jpg,사진&여행 (生活의發見),http://travel1004.tistory.com/414,Boy Group
+K.A.R.D.,65,(G)I-DLE,https://upload.wikimedia.org/wikipedia/commons/1/1d/%28G%29I-DLE_at_%27Latata%27_Showcase_Photo_Time_on_May_2%2C_2018_%285%29.png,뉴스인스타,https://www.youtube.com/watch?v=qkAYBg8nrJs&feature=youtu.be,Girl Group
+K.A.R.D.,66,CHUNG HA,https://upload.wikimedia.org/wikipedia/commons/2/27/Chungha_leaving_Choi_Hwa_Jung%27s_Power_Time_on_January_23%2C_2018.jpg,SHAQ Photo,http://shaq32.tistory.com/642,Solo
+K.A.R.D.,67,Unb,https://upload.wikimedia.org/wikipedia/commons/9/91/180303_UNB_01.png,dispatchsns,https://www.youtube.com/watch?v=IgENFDClD_Y,Boy Group
+K.A.R.D.,68,Unit G,https://upload.wikimedia.org/wikipedia/commons/7/76/180303_UNI.T_01.png,dispatchsns,https://www.youtube.com/watch?v=bWZe2SU38iY,Girl Group
+GOT7,69,PRODUCE 48,https://upload.wikimedia.org/wikipedia/commons/4/4d/20160730-P1000778_%2828679597150%29.jpg,mduangdara,https://www.flickr.com/photos/mduangdara/28679597150/,Girl Group
+BLACKPINK,70,iKON,https://upload.wikimedia.org/wikipedia/commons/0/07/LG%EC%A0%84%EC%9E%90%2C_%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84%EA%B8%89_%EA%B0%9C%EC%84%B1_%EA%B0%96%EC%B6%98_%E2%80%98X_%EC%8B%9C%EB%A6%AC%EC%A6%88%E2%80%99_%EC%B6%9C%EC%8B%9C_%2825673479820%29.jpg,LG전자,https://www.flickr.com/photos/lge/25673479820/,Boy Group
+ASTRO,71,TEEN TOP,https://upload.wikimedia.org/wikipedia/commons/4/47/160821_teen_top.jpg,JJONG's HOUSE,http://cfile3.uf.tistory.com/image/26273A3858693A8808E174,Boy Group
+BLACKPINK,72,Lovelyz,https://upload.wikimedia.org/wikipedia/commons/2/22/Team_Korea_Rio_2016_07.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://flic.kr/p/Jnk7Pp,Girl Group
+ASTRO,73,NCT U,https://upload.wikimedia.org/wikipedia/commons/a/a0/NCT_going_to_a_Music_Bank_recording_in_April_2018_01.png,뉴스인스타 (News In Star),https://www.youtube.com/watch?v=rpMvqN_BR6g,Boy Group
+BLACKPINK,74,TAEMIN,https://upload.wikimedia.org/wikipedia/commons/c/c3/Lee_Tae-min_at_24th_Dream_Concert_14.png,Nine Stars,https://www.youtube.com/watch?v=PPZU5K083P8,Solo
+ASTRO,75,BoA,https://upload.wikimedia.org/wikipedia/commons/6/6a/%E2%80%9C%ED%96%89%EB%B3%B5%EC%9D%84_%EB%82%98%EB%88%A0%EC%9A%94%E2%80%9D_..._%EB%B3%B4%EC%95%84%2C_%EC%96%BC%EA%B5%B4%EB%A7%8C%ED%81%BC_%EC%98%88%EC%81%9C_%EB%A7%88%EC%9D%8C_BoA_%28%EB%94%94%ED%8C%A8%EC%A7%A4%29.jpg,[1],https://www.youtube.com/watch?v=gSfaBPjcEWA,Solo
+Dreamcatcher,76,Moon Byul,https://upload.wikimedia.org/wikipedia/commons/0/04/170923_%EB%A7%88%EB%A7%88%EB%AC%B4_24.jpg,Holic,http://dkyouholic.tistory.com/91,Solo
+BTS,77,T-ara,https://upload.wikimedia.org/wikipedia/commons/6/65/T-ara_at_the_Cyworld_Dream_Music_Festival.jpg,Jinho.Jung,https://www.flickr.com/photos/phploveme/5968954324/,Girl Group
+EXO,78,TVXQ!,https://upload.wikimedia.org/wikipedia/commons/3/31/Kpop_World_Festival_113.jpg,Korea.net / Korean Culture and Information Service (Jeon Han),https://www.flickr.com/photos/42438955@N05/8156698239/,Boy Group
+Pristin,,,,,,
+IOI,,,,,,
+Eric Nam,,,,,,
+IOI,,,,,,
+Sunmi,,,,,,
+Girls Day,,,,,,
+Red Velvet,,,,,,
+Cosmic Girls,,,,,,
+PLAYBACK,,,,,,
+Girls Day,,,,,,
+EXID,,,,,,
+Crayon Pop,,,,,,
+MONSTA X,,,,,,
+WINNER,,,,,,
+MONSTA X,,,,,,
+2NE1,,,,,,
+SUPER JUNIOR-D&E,,,,,,
+Red Velvet,,,,,,
+Super Junior,,,,,,
+AMBER,,,,,,
+Red Velvet,,,,,,
+GD X TAEYANG,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+GFRIEND,,,,,,
+PENTAGON,,,,,,
+PENTAGON,,,,,,
+Stray Kids,,,,,,
+BTS,,,,,,
+BTS,,,,,,
+BTS,,,,,,
+BTS,,,,,,
+BTS,,,,,,
+BTS,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+Girls' Generation,,,,,,
+EXO,,,,,,
+EXO-CBX,,,,,,
+Weki Meki,,,,,,
+AOA CREAM,,,,,,
+Highlight,,,,,,
+APink,,,,,,
+APink,,,,,,
+APink,,,,,,
+APink,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR,,,,,,
+SISTAR19,,,,,,
+SISTAR19,,,,,,
+Red Velvet,,,,,,
+Red Velvet,,,,,,
+Girls Day,,,,,,
+Girls Day,,,,,,
+SHINee,,,,,,
+SHINee,,,,,,
+SHINee,,,,,,
+WINNER,,,,,,
+Block B,,,,,,
+Block B,,,,,,
+Block B,,,,,,
+Block B,,,,,,
+Block B,,,,,,
+Block B,,,,,,
+INFINITE,,,,,,
+INFINITE,,,,,,
+INFINITE,,,,,,
+INFINITE,,,,,,
+INFINITE,,,,,,
+INFINITE,,,,,,
+MOMOLAND,,,,,,
+Brown Eyed Girls,,,,,,
+CLC,,,,,,
+2NE1,,,,,,
+4MINUTE,,,,,,
+4MINUTE,,,,,,
+Pristin,,,,,,
+Wanna One,,,,,,
+PSY,,,,,,
+PSY,,,,,,
+PSY,,,,,,
+B1A4,,,,,,
+PSY,,,,,,
+IOI,,,,,,
+HyunA,,,,,,
+B1A4,,,,,,
+HyunA,,,,,,
+HyunA,,,,,,
+VIXX,,,,,,
+B1A4,,,,,,
+VIXX,,,,,,
+VIXX,,,,,,
+VIXX,,,,,,
+UP10TION,,,,,,
+UP10TION,,,,,,
+UP10TION,,,,,,
+UP10TION,,,,,,
+AOA,,,,,,
+AOA,,,,,,
+AOA,,,,,,
+AOA,,,,,,
+EXID,,,,,,
+EXID,,,,,,
+EXID,,,,,,
+2PM,,,,,,
+Kara,,,,,,
+Miss A,,,,,,
+THE BOYZ,,,,,,
+JBJ,,,,,,
+PENTAGON,,,,,,
+THE BOYZ,,,,,,
+MAMAMOO,,,,,,
+SEVENTEEN,,,,,,
+NCT 127,,,,,,
+HALO,,,,,,
+SNUPER,,,,,,
+(G)I-DLE,,,,,,
+CHUNG HA,,,,,,
+Unb,,,,,,
+Unit G,,,,,,
+GFRIEND,,,,,,
+Twice,,,,,,
+BTS,,,,,,
+Red Velvet,,,,,,
+Dreamcatcher,,,,,,
+PRODUCE 48,,,,,,
+iKON,,,,,,
+SEVENTEEN,,,,,,
+SEVENTEEN,,,,,,
+WINNER,,,,,,
+TEEN TOP,,,,,,
+Lovelyz,,,,,,
+Stray Kids,,,,,,
+Stray Kids,,,,,,
+Super Junior,,,,,,
+VIXX,,,,,,
+NCT U,,,,,,
+EXO-CBX,,,,,,
+TAEMIN,,,,,,
+BoA,,,,,,
+BoA,,,,,,
+BoA,,,,,,
+2NE1,,,,,,
+2NE1,,,,,,
+2NE1,,,,,,
+2NE1,,,,,,
+2NE1,,,,,,
+Wanna One,,,,,,
+SHINee,,,,,,
+Sunmi,,,,,,
+Moon Byul,,,,,,
+CHUNG HA,,,,,,
+T-ara,,,,,,
+f(x),,,,,,
+f(x),,,,,,
+TVXQ!,,,,,,
+EXO,,,,,,

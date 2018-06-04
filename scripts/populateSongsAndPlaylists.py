@@ -3,7 +3,7 @@ import httplib, urllib
 import json
 
 def populateSongsAndPlaylists():
-    URL = 'localhost'
+    URL = '18.218.83.175'
     headers = {'Content-type': 'application/x-www-form-urlencoded'}
 
     with open('../csv/songs.csv') as csvfile:
@@ -24,7 +24,7 @@ def populateSongsAndPlaylists():
 
             # We need to add playlist for this difficulty
             if difficulty not in playlistIDs:
-                params = urllib.urlencode({'name': difficulty, 'isPreset': True, 'songIDs': []})
+                params = urllib.urlencode({'name': difficulty, 'likes': 0, 'plays': 0, 'author': 'Admin Christian', 'isPreset': True, 'songIDs': []})
                 conn.request('POST', '/insert_playlist', params, headers)
                 response = conn.getresponse()
 
@@ -36,6 +36,7 @@ def populateSongsAndPlaylists():
                     playlistIDs[difficulty] = resp['result']['_id']
                     print 'Playlist "' + difficulty + '" added!'
 
+            print('duration = ', duration)
             params = urllib.urlencode({
                 'title': songTitle, 
                 'artistName': artistName, 

@@ -15,3 +15,9 @@ difficulty: [DIFFICULTY]
 duration: [DURATION]
 ```
 
+In order to restart the node server, kill all the node processes.
+Then, run the command in the background using:
+```
+ps aux | grep node
+sudo npm start &
+```
